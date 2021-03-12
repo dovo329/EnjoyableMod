@@ -153,6 +153,16 @@
     [self commit];
 }
 
+- (IBAction)turboChanged:(NSButton *)sender {
+    [sender.window makeFirstResponder:sender];
+    if (sender.state == NSOnState) {
+        NSLog(@"Turbo is on!");
+    } else {
+        NSLog(@"Turbo is off");
+    }
+    [self commit];
+}
+
 - (NJOutput *)makeOutput {
     switch (self.radioButtons.selectedRow) {
         case 0:
