@@ -253,10 +253,18 @@
         }
         self.title.stringValue = inpFullName;
     }
+    
+    // init these to off by default because if it is an NJOutputKeyPress then it will override this from what's stored on the NJOutputKeyPress.
+    self.turboForKey.state = NSOffState;
+    self.turboToggleTimeText.doubleValue = 0;
+    self.turboForKey.enabled = NO;
+    self.turboToggleTimeText.enabled = NO;
 
     if ([output isKindOfClass:NJOutputKeyPress.class]) {
         [self.radioButtons selectCellAtRow:1 column:0];
         self.keyInput.keyCode = [(NJOutputKeyPress*)output keyCode];
+        self.turboForKey.enabled = YES;
+        self.turboToggleTimeText.enabled = YES;
         self.turboForKey.state = [(NJOutputKeyPress*)output isTurboOn] ? NSOnState : NSOffState;
         self.turboToggleTimeText.doubleValue = [(NJOutputKeyPress*)output turboTimeBetweenToggledInSeconds] * 1000.0;
     } else if ([output isKindOfClass:NJOutputMapping.class]) {
