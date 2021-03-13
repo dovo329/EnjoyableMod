@@ -43,7 +43,7 @@
             // create a new timer
             _turboIsKeyDown = YES;
             _turboTimer =
-            [NSTimer scheduledTimerWithTimeInterval:0.025
+            [NSTimer scheduledTimerWithTimeInterval:self.turboTimeBetweenToggledInSeconds
                                              target:self
                                            selector:@selector(_turboTimerCallback:)
                                            userInfo:nil
@@ -66,7 +66,7 @@
 }
 
 - (void)_turboTimerCallback:(NSTimer*)timer {
-    NSLog(@"_turboIsKeyDown: %@ auto toggle the keycode: %hu timer: %@", _turboIsKeyDown ? @"YES" : @"NO", _keyCode, timer);
+//    NSLog(@"_turboIsKeyDown: %@ auto toggle the keycode: %hu timer: %@", _turboIsKeyDown ? @"YES" : @"NO", _keyCode, timer);
     
     if (_keyCode != NJKeyInputFieldEmpty) {
         if (_turboIsKeyDown == YES) {

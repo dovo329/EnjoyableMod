@@ -12,5 +12,6 @@
 
 @property (nonatomic, assign) CGKeyCode keyCode;
 @property (nonatomic, assign) BOOL isTurboOn;
+@property (nonatomic, assign) double turboTimeBetweenToggledInSeconds;
 
 @end
