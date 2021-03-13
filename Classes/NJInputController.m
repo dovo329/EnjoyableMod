@@ -125,7 +125,7 @@ static CVReturn _updateDL(CVDisplayLinkRef displayLink,
     for (NJInput *subInput in children) {
         NJOutput *output = self.currentMapping[subInput];
         output.magnitude = subInput.magnitude;
-        output.running = subInput.active;
+        output.running = subInput.active; // This is what triggers the CGEventPost
         if ((output.running || output.magnitude != 0) && output.isContinuous)
             [self addRunningOutput:output];
     }
