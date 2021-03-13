@@ -13,6 +13,7 @@
 @property (nonatomic, assign) float magnitude;
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, readonly) BOOL isContinuous;
+@property (nonatomic, assign) BOOL isTurboOn;
 
 - (void)trigger;
 - (void)untrigger;

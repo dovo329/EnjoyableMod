@@ -21,6 +21,7 @@
 
 @implementation NJOutputViewController {
     NJInput *_input;
+    BOOL _isTurboOn;
 }
 
 - (id)init {
@@ -157,8 +158,10 @@
     [sender.window makeFirstResponder:sender];
     if (sender.state == NSOnState) {
         NSLog(@"Turbo is on!");
+        _isTurboOn = YES;
     } else {
         NSLog(@"Turbo is off");
+        _isTurboOn = NO;
     }
     [self commit];
 }
@@ -171,6 +174,7 @@
             if (self.keyInput.hasKeyCode) {
                 NJOutputKeyPress *k = [[NJOutputKeyPress alloc] init];
                 k.keyCode = self.keyInput.keyCode;
+                k.isTurboOn = _isTurboOn;
                 return k;
             } else {
                 return nil;
@@ -180,6 +184,7 @@
             NJOutputMapping *c = [[NJOutputMapping alloc] init];
             c.mapping = [self.delegate outputViewController:self
                                             mappingForIndex:self.mappingPopup.indexOfSelectedItem];
+            c.isTurboOn = _isTurboOn;
             return c;
         }
         case 3: {

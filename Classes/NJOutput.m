@@ -15,6 +15,7 @@
 
 @implementation NJOutput {
     BOOL running;
+    BOOL _isTurboOn;
 }
 
 + (NSString *)serializationCode {
@@ -80,6 +81,14 @@
         else
             [self untrigger];
     }
+}
+
+- (BOOL)isTurboOn {
+    return _isTurboOn;
+}
+
+- (void)setIsTurboOn:(BOOL)nextIsTurboOn {
+    _isTurboOn = nextIsTurboOn;
 }
 
 - (void)postLoadProcess:(id <NSFastEnumeration>)allMappings {
