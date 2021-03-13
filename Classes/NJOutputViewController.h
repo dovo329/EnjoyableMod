@@ -27,6 +27,8 @@
 @property (nonatomic, strong) IBOutlet NSPopUpButton *mappingPopup;
 @property (nonatomic, strong) IBOutlet NSButton *smoothCheck;
 @property (nonatomic, strong) IBOutlet NSButton *unknownMapping;
+@property (nonatomic, strong) IBOutlet NSButton *turboForKey;
+@property (nonatomic, strong) IBOutlet NSTextField *turboToggleTimeText;
 
 @property (nonatomic, weak) IBOutlet id <NJOutputViewControllerDelegate> delegate;
 

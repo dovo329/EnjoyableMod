@@ -257,6 +257,8 @@
     if ([output isKindOfClass:NJOutputKeyPress.class]) {
         [self.radioButtons selectCellAtRow:1 column:0];
         self.keyInput.keyCode = [(NJOutputKeyPress*)output keyCode];
+        self.turboForKey.state = [(NJOutputKeyPress*)output isTurboOn] ? NSOnState : NSOffState;
+        self.turboToggleTimeText.doubleValue = [(NJOutputKeyPress*)output turboTimeBetweenToggledInSeconds] * 1000.0;
     } else if ([output isKindOfClass:NJOutputMapping.class]) {
         [self.radioButtons selectCellAtRow:2 column:0];
         NSMenuItem *item = [self.mappingPopup itemWithIdenticalRepresentedObject:

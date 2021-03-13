@@ -324,7 +324,7 @@ Switch back to re-enable input.</string>
                                 <rect key="frame" x="189" y="80" width="150" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" segmentDistribution="fill" style="rounded" trackingMode="selectOne" id="750">
-                                    <font key="font" metaFont="label" size="11"/>
+                                    <font key="font" metaFont="controlContent" size="11"/>
                                     <segments>
                                         <segment label="←" width="36" tag="-2"/>
                                         <segment label="→" width="35" tag="2"/>
@@ -358,7 +358,7 @@ Switch back to re-enable input.</string>
                                     <action selector="turboChanged:" target="686" id="evy-f4-bb0"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="if0-85-ksm">
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="if0-85-ksm" userLabel="TurboToggleTimeText">
                                 <rect key="frame" x="191" y="7" width="115" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="lEy-fG-k77">
@@ -392,7 +392,7 @@ Switch back to re-enable input.</string>
                                 <rect key="frame" x="189" y="164" width="224" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <segmentedCell key="cell" controlSize="small" borderStyle="border" alignment="left" segmentDistribution="fill" style="rounded" trackingMode="selectOne" id="755">
-                                    <font key="font" metaFont="label" size="11"/>
+                                    <font key="font" metaFont="controlContent" size="11"/>
                                     <segments>
                                         <segment label="←" width="55"/>
                                         <segment label="→" width="55" tag="1"/>
@@ -539,6 +539,8 @@ Switch back to re-enable input.</string>
                 <outlet property="scrollSpeedSlider" destination="887" id="891"/>
                 <outlet property="smoothCheck" destination="946" id="949"/>
                 <outlet property="title" destination="706" id="709"/>
+                <outlet property="turboForKey" destination="Uut-Ga-Ehi" id="krh-1i-hTj"/>
+                <outlet property="turboToggleTimeText" destination="if0-85-ksm" id="mFP-TQ-eFz"/>
                 <outlet property="unknownMapping" destination="1020" id="1022"/>
             </connections>
         </customObject>

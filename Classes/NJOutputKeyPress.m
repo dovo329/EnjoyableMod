@@ -39,6 +39,7 @@
         [_turboTimer invalidate];
         _turboTimer = nil;
         
+        NSLog(@"isTurboOn: %@", self.isTurboOn ? @"YES" : @"NO");
         if (self.isTurboOn == YES) {
             // create a new timer
             _turboIsKeyDown = YES;
