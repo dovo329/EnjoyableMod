@@ -14,19 +14,41 @@
     BOOL _turboIsKeyDown;
 }
 
+-(instancetype)init {
+    self = [super init];
+    if (self != nil) {
+        _keyCode = 0;
+        _isTurboOn = NO;
+        _turboTimeBetweenToggledInSeconds = 0.0333;
+    }
+    return self;
+}
+
 + (NSString *)serializationCode {
     return @"key press";
 }
 
 - (NSDictionary *)serialize {
-    return _keyCode != NJKeyInputFieldEmpty
-        ? @{ @"type": self.class.serializationCode, @"key": @(_keyCode) }
-        : nil;
+    if (_keyCode != NJKeyInputFieldEmpty) {
+        NSDictionary *retDict = @{
+            @"type": self.class.serializationCode,
+            @"key": @(_keyCode),
+            @"isTurboOn": [NSNumber numberWithBool:_isTurboOn],
+            @"turboTimeBetweenToggledInSeconds": [NSNumber numberWithDouble:_turboTimeBetweenToggledInSeconds]
+        };
+        NSLog(@"NJOutputKeyPress serialize retDict: %@", retDict);
+        return retDict;
+    } else {
+        return nil;
+    }
 }
 
 + (NJOutput *)outputWithSerialization:(NSDictionary *)serialization {
+    NSLog(@"outputWithSerialization: %@", serialization);
     NJOutputKeyPress *output = [[NJOutputKeyPress alloc] init];
     output.keyCode = [serialization[@"key"] shortValue];
+    output.isTurboOn = [serialization[@"isTurboOn"] boolValue];
+    output.turboTimeBetweenToggledInSeconds = [serialization[@"turboTimeBetweenToggledInSeconds"] doubleValue];
     return output;
 }
 

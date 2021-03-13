@@ -266,7 +266,9 @@
         self.turboForKey.enabled = YES;
         self.turboToggleTimeText.enabled = YES;
         self.turboForKey.state = [(NJOutputKeyPress*)output isTurboOn] ? NSOnState : NSOffState;
+        _isTurboOn = [(NJOutputKeyPress*)output isTurboOn];
         self.turboToggleTimeText.doubleValue = [(NJOutputKeyPress*)output turboTimeBetweenToggledInSeconds] * 1000.0;
+        _turboTimeBetweenToggledInSeconds = [(NJOutputKeyPress*)output turboTimeBetweenToggledInSeconds];
     } else if ([output isKindOfClass:NJOutputMapping.class]) {
         [self.radioButtons selectCellAtRow:2 column:0];
         NSMenuItem *item = [self.mappingPopup itemWithIdenticalRepresentedObject:
