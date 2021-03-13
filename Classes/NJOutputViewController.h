@@ -40,6 +40,7 @@
 - (IBAction)mouseSpeedChanged:(id)sender;
 - (IBAction)scrollSpeedChanged:(id)sender;
 - (IBAction)scrollTypeChanged:(id)sender;
+- (IBAction)turboChanged:(id)sender;
 
 @end
 

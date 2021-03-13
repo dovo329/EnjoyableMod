@@ -2,7 +2,7 @@ Fork of https://git.yukkurigames.com/enjoyable.git
 
 Updated to compile on XCode 11
 
-Note that you must archive this with a development team or greater in order for the app to app CGEventPost commands to work on Mac OSX. This app can not be sandboxed for that reason.
+Note that you must enable in Mac Preferences -> Security & Privacy -> Privacy this Enjoyable app for "Allow the apps below to control your computer, for this program to be able to send key presses to other applications.
 
 Enjoyable is an application for Mac OS X which allows you to use
 controller inputs like a mouse or keyboard.

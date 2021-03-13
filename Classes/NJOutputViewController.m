@@ -21,6 +21,8 @@
 
 @implementation NJOutputViewController {
     NJInput *_input;
+    BOOL _isTurboOn;
+    double _turboTimeBetweenToggledInSeconds;
 }
 
 - (id)init {
@@ -153,6 +155,22 @@
     [self commit];
 }
 
+- (IBAction)turboChanged:(NSButton *)sender {
+    [sender.window makeFirstResponder:sender];
+    if (sender.state == NSOnState) {
+        _isTurboOn = YES;
+    } else {
+        _isTurboOn = NO;
+    }
+    [self commit];
+}
+
+- (IBAction)turboTimeBetweenToggledUpdated:(NSTextFieldCell *)sender {
+    _turboTimeBetweenToggledInSeconds = sender.doubleValue / 1000.0;
+    [self commit];
+}
+
+
 - (NJOutput *)makeOutput {
     switch (self.radioButtons.selectedRow) {
         case 0:
@@ -161,6 +179,8 @@
             if (self.keyInput.hasKeyCode) {
                 NJOutputKeyPress *k = [[NJOutputKeyPress alloc] init];
                 k.keyCode = self.keyInput.keyCode;
+                k.isTurboOn = _isTurboOn;
+                k.turboTimeBetweenToggledInSeconds = _turboTimeBetweenToggledInSeconds;
                 return k;
             } else {
                 return nil;
