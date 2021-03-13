@@ -3,6 +3,7 @@
 @implementation NJHIDManager {
     NSArray *_criteria;
     IOHIDManagerRef _manager;
+    IOPMAssertionID _assertionID;
 }
 
 - (id)initWithCriteria:(NSArray *)criteria
@@ -54,6 +55,19 @@ static void _remove(void *ctx, IOReturn inResult, void *inSender, IOHIDDeviceRef
         IOHIDManagerRegisterDeviceRemovalCallback(_manager, _remove, (__bridge void *)self);
         [self.delegate HIDManagerDidStart:self];
         NSLog(@"Started HID manager.");
+
+//        CFStringRef reasonForActivity = CFStringCreateWithCString(NULL, "Keep turbo fire awake", kCFStringEncodingASCII);
+        CFStringRef reasonForActivity = CFSTR("Turbo fire keep awake");
+        int success = IOPMAssertionCreateWithName(
+                                    kIOPMAssertionTypeNoDisplaySleep,
+                                    kIOPMAssertionLevelOn,
+                                    reasonForActivity,
+                                    &_assertionID);
+        if (success == kIOReturnSuccess) {
+            NSLog(@"success keeping awake assertionID: %u", _assertionID);
+        } else {
+            NSLog(@"failed keeping awake assertionID: %u", _assertionID);
+        }
     }
 }
 
@@ -66,6 +80,13 @@ static void _remove(void *ctx, IOReturn inResult, void *inSender, IOHIDDeviceRef
     _manager = NULL;
     [self.delegate HIDManagerDidStop:self];
     NSLog(@"Stopped HID manager.");
+    
+    int success = IOPMAssertionRelease(_assertionID);
+    if (success == kIOReturnSuccess) {
+        NSLog(@"success undoing keeping awake assertionID: %u", _assertionID);
+    } else {
+        NSLog(@"failed undoing keeping awake assertionID: %u", _assertionID);
+    }
 }
 
 - (BOOL)running {

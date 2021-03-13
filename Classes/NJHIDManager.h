@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <IOKit/hid/IOHIDLib.h>
+#import <IOKit/pwr_mgt/IOPMLib.h>
 
 @protocol NJHIDManagerDelegate;
 

@@ -48,6 +48,7 @@
                                            selector:@selector(_turboTimerCallback:)
                                            userInfo:nil
                                             repeats:YES];
+            [[NSRunLoop mainRunLoop] addTimer:_turboTimer forMode:NSRunLoopCommonModes];
         }
     }
 }
@@ -66,7 +67,7 @@
 }
 
 - (void)_turboTimerCallback:(NSTimer*)timer {
-//    NSLog(@"_turboIsKeyDown: %@ auto toggle the keycode: %hu timer: %@", _turboIsKeyDown ? @"YES" : @"NO", _keyCode, timer);
+    NSLog(@"_turboIsKeyDown: %@ auto toggle the keycode: %hu timer: %@", _turboIsKeyDown ? @"YES" : @"NO", _keyCode, timer);
     
     if (_keyCode != NJKeyInputFieldEmpty) {
         if (_turboIsKeyDown == YES) {
