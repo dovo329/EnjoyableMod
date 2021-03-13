@@ -9,7 +9,10 @@
 
 #import "NJKeyInputField.h"
 
-@implementation NJOutputKeyPress
+@implementation NJOutputKeyPress {
+    NSTimer *_turboTimer;
+    BOOL _turboIsKeyDown;
+}
 
 + (NSString *)serializationCode {
     return @"key press";
@@ -32,6 +35,20 @@
         CGEventRef keyDown = CGEventCreateKeyboardEvent(NULL, _keyCode, YES);
         CGEventPost(kCGHIDEventTap, keyDown);
         CFRelease(keyDown);
+        
+        [_turboTimer invalidate];
+        _turboTimer = nil;
+        
+        if (self.isTurboOn == YES) {
+            // create a new timer
+            _turboIsKeyDown = YES;
+            _turboTimer =
+            [NSTimer scheduledTimerWithTimeInterval:0.025
+                                             target:self
+                                           selector:@selector(_turboTimerCallback:)
+                                           userInfo:nil
+                                            repeats:YES];
+        }
     }
 }
 
@@ -40,6 +57,28 @@
         CGEventRef keyUp = CGEventCreateKeyboardEvent(NULL, _keyCode, NO);
         CGEventPost(kCGHIDEventTap, keyUp);
         CFRelease(keyUp);
+        
+        [_turboTimer invalidate];
+        _turboTimer = nil;
+        
+        _turboIsKeyDown = NO;
+    }
+}
+
+- (void)_turboTimerCallback:(NSTimer*)timer {
+    NSLog(@"_turboIsKeyDown: %@ auto toggle the keycode: %hu timer: %@", _turboIsKeyDown ? @"YES" : @"NO", _keyCode, timer);
+    
+    if (_keyCode != NJKeyInputFieldEmpty) {
+        if (_turboIsKeyDown == YES) {
+            CGEventRef keyUp = CGEventCreateKeyboardEvent(NULL, _keyCode, NO);
+            CGEventPost(kCGHIDEventTap, keyUp);
+            CFRelease(keyUp);
+        } else {
+            CGEventRef keyDown = CGEventCreateKeyboardEvent(NULL, _keyCode, YES);
+            CGEventPost(kCGHIDEventTap, keyDown);
+            CFRelease(keyDown);
+        }
+        _turboIsKeyDown = !_turboIsKeyDown;
     }
 }
 

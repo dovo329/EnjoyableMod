@@ -184,7 +184,6 @@
             NJOutputMapping *c = [[NJOutputMapping alloc] init];
             c.mapping = [self.delegate outputViewController:self
                                             mappingForIndex:self.mappingPopup.indexOfSelectedItem];
-            c.isTurboOn = _isTurboOn;
             return c;
         }
         case 3: {
